@@ -88,6 +88,13 @@ custom.css and it will override the style in this file.
     #menu .dropdown .sub-menu li { border: none; }
     #menu .dropdown .sub-menu { border: none; }
     #menutop .btn_menu { background-color: #1F394D; }
+
+    #topmenu-wrap > ul { display: none; }
+    #topmenu-wrap.mobile-menu > ul { display: block; }
+
+    #menu-wrap > ul { display: none; }
+    #menu-wrap.mobile-menu > ul { display: block; }
+
     .mobile-menu { display: none; clear: both; }
     .dropdown li { display: block; float: none; }
     #menu .dropdown > li:after { display: none; }

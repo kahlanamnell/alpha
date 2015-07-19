@@ -4,6 +4,13 @@ http://www.wpzoom.com/themes/alpha/
 CHANGELOG
 ---------
 
+v 2.0.1 (June 21, 2015)
+
+    - Fixed a bug with menu showing on mobile devices while the a page is loading
+    - modified files:
+        - /css/media-queries.css
+
+
 v 2.0 (April 2, 2015)
 
     - Social, Twitter, Facebook widgets removed in favour of Plugins: http://www.wpzoom.com/plugins/
