@@ -60,7 +60,7 @@
 
 				<a href="<?php echo home_url(); ?>" title="<?php bloginfo('description'); ?>">
 					<?php if (!option::get('misc_logo_path')) { bloginfo('name'); } else { ?>
-						<img src="<?php echo ui::logo(); ?>" alt="<?php bloginfo('name'); ?>" />
+						<h1><img src="<?php echo ui::logo(); ?>" alt="<?php bloginfo('name'); ?>" /></h1>
 					<?php } ?>
 				</a>
 
@@ -105,7 +105,7 @@
 
 				</div>
 
-				<?php if (option::get('search_form') == 'on') { get_search_form(); } ?>
+				<?php //if (option::get('search_form') == 'on') { get_search_form(); } ?>
 
 				<div class="clear"></div>
 
