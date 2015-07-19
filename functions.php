@@ -29,3 +29,15 @@ require_once FUNC_INC . "/widgets/recentcomments.php";
 require_once FUNC_INC . "/widgets/featured-category.php";
 require_once FUNC_INC . "/widgets/popularnews.php";
 require_once FUNC_INC . "/widgets/video.php";
+
+function custom_excerpt($text) {  // custom 'read more' link
+   
+   if ( strpos("Read More", $text) !== false) {
+     $text = str_replace("[Read More&#8230;]", "", $text);  
+     $text = '<p>' . strip_tags($text) . '<a class="more-link" href="'. get_permalink($post->ID) . '">[Mehr...]</a></p>';
+   }
+
+   
+   return $text;
+}
+//add_filter('the_excerpt', 'custom_excerpt');
