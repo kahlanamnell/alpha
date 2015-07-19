@@ -1,0 +1,9 @@
+Alpha Theme
+http://www.wpzoom.com/themes/alpha/
+
+CHANGELOG
+---------
+
+v 1.0 (October 24, 2013)
+
+	- initial release
