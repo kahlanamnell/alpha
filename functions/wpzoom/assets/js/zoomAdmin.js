@@ -17,7 +17,6 @@ jQuery(document).ready(function($) {
     });
 })
 
-
 /**
  * Tabs functionality
  */
@@ -28,11 +27,24 @@ jQuery(document).ready(function($) {
     $(".tab_content").hide();
     $(".tab_content .sub").hide(); // Hide all subtabs
 
-    $("ul.tabs li:first").addClass("active").show(); //Activate first tab
-    $("ul.tabs li:first li:first").addClass("active").show(); //Activate first subtab
-    $(".tab_content:first").show(); //Show first tab content
-    $(".tab_content:first .sub:first").show(); // Show first subtab content
+    var section = $.cookie('active_section');
+    var tab = $.cookie('active_tab');
 
+    if (!section || !tab) {
+        $("ul.tabs li:first").addClass("active").show(); //Activate first tab
+        $("ul.tabs li:first li:first").addClass("active").show(); //Activate first subtab
+        $(".tab_content:first").show(); //Show first tab content
+        $(".tab_content:first .sub:first").show(); // Show first subtab content
+    } else {
+        $('a[href=' + section +']').parent().addClass('active').show();
+        $('a[href=' + tab + ']').parent().addClass('active');
+        $(section).show();
+        $(tab).show();
+    }
+
+    $(".tab_container").fadeIn();
+
+    /* Handle clicks for arrow icon */
     $("ul.tabs em").click(function() {
         var id = $(this).parent().attr("id");
 
@@ -42,6 +54,7 @@ jQuery(document).ready(function($) {
         });
     });
 
+    /* Handle clicks for accordeons */
     $(".wz-parent > a").click(function() {
         // prevent flickering
         if ($(this).parent().hasClass('active')) {
@@ -71,6 +84,8 @@ jQuery(document).ready(function($) {
             $(activeTab).show();
             $(activeTab + ' .sub').first().slideDown();
 
+            $.cookie('active_section', activeTab);
+            $.cookie('active_tab', '#' + $(activeTab + ' .sub').first().attr('id'));
         }
 
         $(this).parent().find('li:first').addClass('active');
@@ -79,6 +94,7 @@ jQuery(document).ready(function($) {
 
     });
 
+    /* Handle clicks for tabs */
     $(".sub > a").click(function() {
         // prevent flickering
         if ($(this).parent().hasClass('active')) {
@@ -98,6 +114,9 @@ jQuery(document).ready(function($) {
         var activeTab = $(this).attr('href');
         $(p).show();
         $(activeTab).show();
+
+        $.cookie('active_section', p);
+        $.cookie('active_tab', activeTab);
 
         return false;
     });
@@ -228,7 +247,7 @@ jQuery(document).ready(function($) {
         $("#misc_export_widgets").html('Please refresh this page and then get export data. Don\'t forget to save if you changed something.');
 
         $.post(wpzoom_ajax_url, data, function(response) {
-            if (response === 'success') {
+            if (response.success) {
                 loading.fadeOut();
                 success.fadeIn();
                 window.setTimeout(function() {
@@ -303,7 +322,7 @@ jQuery(document).ready(function($) {
         $("#misc_export_widgets").html('Please refresh this page and then get export data. Don\'t forget to save if you changed something.');
 
         $.post(wpzoom_ajax_url, data, function(response) {
-            if ($.trim(response) === 'success') {
+            if (response.success) {
                 loading.fadeOut();
                 success.fadeIn();
                 window.setTimeout(function() {
@@ -372,13 +391,10 @@ jQuery(document).ready(function($) {
         $('.mlu_remove').live('click', function(event) {
             $(this).hide();
             $(this).parents().parents().children('.upload').attr('value', '');
-            $(this).parents('.screenshot').slideUp();
-            $(this).parents('.screenshot').siblings('.of-background-properties').hide();
+            $(this).parents('.screenshot').animate({ 'opacity' : 0, 'height' : 0 });
+
             return false;
         });
-
-        $('a.delete-inline', "#option-1").hide();
-
     },
 
     recreateFileField: function () {
@@ -400,80 +416,54 @@ jQuery(document).ready(function($) {
     },
 
     mediaUpload: function () {
-
-        $.noConflict();
-
-        $( 'input.upload_button' ).removeAttr('style');
-
         var formfield,
             formID,
-            btnContent = true,
-            tbframe_interval;
+            btnContent,
+            uploader;
+
+        $('input.upload_button').removeAttr('style');
 
         // On Click
-        $('input.upload_button').live("click", function () {
+        $('input.upload_button').on("click", function () {
             formfield = $(this).prev('input').attr('id');
-            formID = $(this).attr('rel');
 
-            tbframe_interval = setInterval(function() {
-                jQuery("#TB_iframeContent").contents().find(".savesend .button").val("Use This Image");
-                jQuery("#TB_iframeContent").contents().find("div#gallery-settings").hide();
-            }, 2000);
+            if (typeof(uploader) !== "undefined") {
+                uploader.close();
+            }
 
-            var wpzoom_title = '';
+            wp.media.model.settings.post.id = $(this).attr('rel');
 
-            if ($(this).parents('.section').find('.heading')) { wpzoom_title = $(this).parents('.section').find('.heading').text(); }
+            uploader = wp.media.frames.wpzoom_uploader = wp.media({
+                'title' : 'Logo Image',
+                'library' : {
+                    'type' : 'image',
+                    'uploadedTo' : $(this).attr('rel')
+                },
+                'button' : {
+                    'text' : 'Use this image'
+                },
+                'multiple' : false
+            });
 
-            tb_show( wpzoom_title, 'media-upload.php?post_id='+formID+'&TB_iframe=1&width=650' );
+            uploader.on('select', function() {
+                var attachment = uploader.state().get('selection').first().toJSON();
+                var image = /(^.*\.jpg|jpeg|png|gif|ico*)/gi;
+
+                if (attachment.url.match(image)) {
+                    btnContent = '<img src="'+attachment.url+'" alt="" /><a href="#" class="mlu_remove button">Remove Image</a>';
+                } else {
+                    html = '<a href="'+attachment.url+'" target="_blank" rel="external">View File</a>';
+                    btnContent = '<div class="no_image"><span class="file_link">'+html+'</span><a href="#" class="mlu_remove button">Remove</a></div>';
+                }
+
+                $('#' + formfield).val(attachment.url);
+                $("#" + formfield + "_image").html(btnContent).css({ 'height' : 'auto', 'opacity' : 1 });
+            });
+
+            uploader.open();
+
             return false;
         });
-
-        window.original_send_to_editor = window.send_to_editor;
-        window.send_to_editor = function(html) {
-
-        if (formfield) {
-
-            clearInterval(tbframe_interval);
-
-            if ( $(html).html(html).find('img').length > 0 ) {
-
-                itemurl = $(html).html(html).find('img').attr('src');
-
-            } else {
-
-                var htmlBits = html.split("'");
-                itemurl = htmlBits[1];
-
-                var itemtitle = htmlBits[2];
-
-                itemtitle = itemtitle.replace( '>', '' );
-                itemtitle = itemtitle.replace( '</a>', '' );
-
-            }
-
-            var image = /(^.*\.jpg|jpeg|png|gif|ico*)/gi;
-            var document = /(^.*\.pdf|doc|docx|ppt|pptx|odt*)/gi;
-            var audio = /(^.*\.mp3|m4a|ogg|wav*)/gi;
-            var video = /(^.*\.mp4|m4v|mov|wmv|avi|mpg|ogv|3gp|3g2*)/gi;
-
-            if (itemurl.match(image)) {
-                btnContent = '<img src="'+itemurl+'" alt="" /><a href="#" class="mlu_remove button">Remove Image</a>';
-            } else {
-                html = '<a href="'+itemurl+'" target="_blank" rel="external">View File</a>';
-                btnContent = '<div class="no_image"><span class="file_link">'+html+'</span><a href="#" class="mlu_remove button">Remove</a></div>';
-            }
-
-            $('#' + formfield).val(itemurl);
-            $("#" + formfield + "_image").slideDown().html(btnContent);
-            tb_remove();
-
-            } else {
-                window.original_send_to_editor(html);
-            }
-
-            formfield = '';
-        }
-
     }
 
     };
@@ -529,7 +519,6 @@ jQuery.cookie = function (key, value, options) {
 /**
  * Custom jQuery radio buttons
  */
-
 jQuery(document).ready(function($) {
     $(".RadioClass").change(function() {
         if ($(this).is(":checked")) {

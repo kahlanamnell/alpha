@@ -10,7 +10,7 @@ body {
 
 a:hover { color:#C12020; }
 
-p { 
+p {
     font-family: 'Merriweather', Garamond, Baskerville, 'Baskerville Old Face', 'Hoefler Text', 'Times New Roman', serif;
 }
 
@@ -27,7 +27,7 @@ p {
 	text-transform: none;
 }
 
-#logo a:hover, 
+#logo a:hover,
 #logo a:active {
 	color: #2e69c3;
 }
@@ -36,7 +36,7 @@ p {
 	margin: 0 0 20px;
 	background: #FCFCFC;
  	border-bottom:4px double #E6E6DC;
-}   
+}
 
 .adv { display: none; }
 
@@ -70,7 +70,7 @@ p {
 	background: none;
 	color: #C12020;
 	font-weight: bold;
-	padding: 5px 0;	 
+	padding: 5px 0;
 }
 
 #news-ticker dd,
@@ -90,7 +90,7 @@ p {
 
 #menu {
 	background:none;
-	padding: 0; 
+	padding: 0;
 	margin:0;
   	-webkit-border-radius: 0;
 	border-radius: 0;
@@ -113,7 +113,7 @@ p {
 #menu .dropdown a:hover {
 	color:#C12020;
 }
- 
+
 .dropdown > li:after {
 	display: none;
 }
@@ -131,10 +131,10 @@ p {
 }
 
 #menu .dropdown {
-	display: inline-block; 
+	display: inline-block;
 	vertical-align: top;
 }
- 
+
 #menu .dropdown > li {
  	display: inline;
 	text-align: left;
@@ -184,7 +184,7 @@ p {
 
 .dropdown  .sub-menu a .sf-sub-indicator {
 	border-left-color: #333;
- 
+
 }
 
 .dropdown  .sub-menu li:hover > a .sf-sub-indicator {
@@ -214,7 +214,7 @@ p {
 	box-shadow: none;
 	margin-right: 30px;
 	width: 255px;
-}	
+}
 
 #main {
 	border-right: 1px solid #E6E6DC;
@@ -382,8 +382,8 @@ ul.tabbernav li.tabberactive a { color: #222; }
 }
 
 
-.flex-control-nav { 
-	background: #222; 
+.flex-control-nav {
+	background: #222;
 	border-radius: 0;
 }
 
@@ -478,7 +478,7 @@ ul.tabbernav li.tabberactive a { color: #222; }
 		width: 96% !important;
 		padding: 1% 0 0;
 	}
-	
+
 	#main { width: 67% !important; }
 
 
@@ -494,20 +494,25 @@ ul.tabbernav li.tabberactive a { color: #222; }
         padding:20px 3% 0 0 !important;
     }
 
-	#footer { padding: 2%;  margin:2% 0 0; } 
+	#footer { padding: 2%;  margin:2% 0 0; }
 
 }
 
 @media screen and (max-width: 768px) {
 
     #main { width: 100% !important; }
+    #sidebar { width: 100% !important; }
+
+    #slider { width: 100%; }
+
+    .featured-separator { display: none; }
 
 	.featured-post {
-        width: 45.5% !important; 
-        margin:0 1% 10px !important; 
+        width: 45.5% !important;
+        margin:0 1% 10px !important;
     }
 
     .btn_menu { background-color:#222 !important; }
     #menutop .btn_menu { background-color:#494949 !important; }
- 
+
 }

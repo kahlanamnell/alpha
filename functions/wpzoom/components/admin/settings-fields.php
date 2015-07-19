@@ -12,7 +12,21 @@ class WPZOOM_Admin_Settings_Fields {
         $this->first = false;
         $stitle = 'wpz_' . substr(md5($name), 0, 8);
         $out.= "<div class=\"sub\" id=\"$stitle\">";
+
+        $out.= '<div class="zoom-sub-header">';
         $out.= "<h4>$name</h4>";
+
+        if (isset($desc)) {
+            if (is_array($desc)) {
+                foreach ($desc as $row) {
+                    $out.= "<p>$row</p>";
+                }
+            } else {
+                $out.= "<p>$desc</p>";
+            }
+        }
+
+        $out.='</div>';
 
         return $out;
     }
@@ -50,6 +64,15 @@ class WPZOOM_Admin_Settings_Fields {
 
         $out.= "<button class=\"button-secondary\" id=\"$id\">$name</button>";
         $out.= "<p>$desc</p>";
+
+        return $out;
+    }
+
+    public function paragraph($args) {
+        extract($args);
+
+        $out.= "<div class=\"checkbox\"><label>$name</label>";
+        $out.= "<p>$desc</p></div>";
 
         return $out;
     }
@@ -225,7 +248,7 @@ class WPZOOM_Admin_Settings_Fields {
     public function select_layout($args) {
         extract($args);
 
-        $out.= "<label>$name</label>";
+        $out.= "<label class=\"layout_label\">$name</label>";
 
         foreach ($options as $key => $val) {
             $out.= "<input id=\"$id--$key\" type=\"radio\" class=\"RadioClass\" name=\"$id\" value=\"$key\"";
@@ -240,7 +263,7 @@ class WPZOOM_Admin_Settings_Fields {
             $out.= "\">";
             $out.= "<img src=\"".WPZOOM::$wpzoomPath."/assets/images/layout-$key.png\" alt=\"\" title=\"$val\" class=\"layout-select\" /></label>";
         }
-        $out.= "<p>$desc</p>";
+        $out.= "<p class=\"layout_desc\">$desc</p>";
 
         return $out;
     }

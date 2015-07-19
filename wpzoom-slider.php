@@ -9,7 +9,7 @@ $loop = new WP_Query( array(
 
 <div id="slider">
 
-	<h3 class="title">Featured Stories</h3>
+	<h3 class="title"><?php _e('Featured Stories', 'wpzoom'); ?></h3>
 
 	<?php if ( $loop->have_posts() ) : ?>
 

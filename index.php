@@ -1,10 +1,10 @@
 <?php get_header(); ?>
 <?php $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // gets current page number ?>
 
-<?php if (is_home() && $paged < 2) { 
+<?php if (is_home() && $paged < 2 && option::is_on('featured_top_display')) {
 
 	get_template_part('wpzoom-featured'); // Display 4 Featured Posts at the Top
-	
+
 	if ( option::get('ad_top_select') == 'on' ) { // Homepage Top Ad ?>
 
 		<div class="adv_top">
@@ -17,13 +17,13 @@
 
 		?></div><?php
 		}
-	
+
 } ?>
 
 <section id="main" role="main">
 
 	<?php if (is_home() && $paged < 2) { // Display Featured Area on Homepage only ?>
- 
+
 		<div class="featured-area">
 
 	 		<?php get_sidebar( 'left' ); // Left Sidebar of Featured Area ?>
@@ -32,7 +32,7 @@
 
 			<?php if (option::get('featured_enable') == 'on' ) { get_template_part('wpzoom-slider'); } // Featured Slideshow ?>
 			<div class="clear"></div>
-		 
+
 		</div>
 
 		<div class="clear"></div>
@@ -58,20 +58,20 @@
 
  	<div class="main-area">
 		<?php if (is_home() && $paged < 2) { ?>
-	   
+
 			<?php dynamic_sidebar('Homepage'); ?>
-			
+
 			<div class="clear"></div>
 
 		<?php } ?>
 
 
 		<?php if ( $paged > 1 || option::get('recent_posts') == 'on') { ?>
-	 
+
 		 	<div class="archiveposts">
-		  
+
 		  		<h3 class="title"><span><?php echo option::get('recent_title'); ?></span></h3>
-		   			 
+
 				<?php
 					global $query_string; // required
 
@@ -86,15 +86,15 @@
 
 					/* Exclude featured posts from Recent Posts */
 					if (option::get('hide_featured') == 'on') {
-						
-						$featured_posts = new WP_Query( 
-							array( 
+
+						$featured_posts = new WP_Query(
+							array(
 								'post__not_in' => get_option( 'sticky_posts' ),
 								'posts_per_page' => option::get('featured_number'),
 								'meta_key' => 'wpzoom_is_featured',
-								'meta_value' => 1				
+								'meta_value' => 1
 								) );
-							
+
 						while ($featured_posts->have_posts()) {
 							$featured_posts->the_post();
 							global $post;
@@ -110,12 +110,12 @@
 					?>
 
 				<?php get_template_part('loop'); ?>
-				 
+
 		 	</div> <!-- /#posts -->
-		
+
 		<?php } ?>
 	</div><!-- /.main-area -->
-  
+
 </section><!-- /#main -->
 
 <?php get_sidebar(); ?>

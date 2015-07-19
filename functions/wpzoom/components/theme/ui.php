@@ -29,6 +29,8 @@ class ui {
 
     /**
      * Smart pages title
+     *
+     * @deprecated Use `add_theme_support( 'title-tag )` instead
      */
     public static function title() {
         if (option::get('seo_enable') == 'off') {
@@ -37,21 +39,23 @@ class ui {
             return;
         }
 
-        if (is_front_page()) {
+        if ( is_front_page() && is_home() ) {
             if (option::get('seo_home_title') == 'Site Title - Site Description') echo get_bloginfo('name').option::get('title_separator').get_bloginfo('description');
             if (option::get('seo_home_title') == 'Site Description - Site Title') echo get_bloginfo('description').option::get('title_separator').get_bloginfo('name');
             if (option::get('seo_home_title') == 'Site Title') echo get_bloginfo('name');
-        }
-
-        #if the title is being displayed on single posts/pages
-        if (is_single() || is_page()) {
+        } elseif ( is_front_page() ) {
+            if (option::get('seo_home_title') == 'Site Title - Site Description') echo get_bloginfo('name').option::get('title_separator').get_bloginfo('description');
+            if (option::get('seo_home_title') == 'Site Description - Site Title') echo get_bloginfo('description').option::get('title_separator').get_bloginfo('name');
+            if (option::get('seo_home_title') == 'Site Title') echo get_bloginfo('name');
+        } elseif ( is_home() ) {
             if (option::get('seo_posts_title') == 'Site Title - Page Title') echo get_bloginfo('name').option::get('title_separator').wp_title('',false,'');
             if (option::get('seo_posts_title') == 'Page Title - Site Title') echo wp_title('',false,'').option::get('title_separator').get_bloginfo('name');
             if (option::get('seo_posts_title') == 'Page Title') echo wp_title('',false,'');
-        }
-
-        #if the title is being displayed on index pages (categories/archives/search results)
-        if (is_category() || is_archive() || is_search()) {
+        } elseif (is_single() || is_page()) {
+            if (option::get('seo_posts_title') == 'Site Title - Page Title') echo get_bloginfo('name').option::get('title_separator').wp_title('',false,'');
+            if (option::get('seo_posts_title') == 'Page Title - Site Title') echo wp_title('',false,'').option::get('title_separator').get_bloginfo('name');
+            if (option::get('seo_posts_title') == 'Page Title') echo wp_title('',false,'');
+        } else {
             if (option::get('seo_pages_title') == 'Site Title - Page Title') echo get_bloginfo('name').option::get('title_separator').wp_title('',false,'');
             if (option::get('seo_pages_title') == 'Page Title - Site Title') echo wp_title('',false,'').option::get('title_separator').get_bloginfo('name');
             if (option::get('seo_pages_title') == 'Page Title') echo wp_title('',false,'');
@@ -140,7 +144,7 @@ class ui {
             $upload_dir = wp_upload_dir();
             $base_url = $upload_dir['baseurl'];
             if ( substr( $img_url, 0, strlen( $base_url ) ) !== $base_url ) return $image;
-            $result = $wpdb->get_var( $wpdb->prepare( "SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_wp_attachment_metadata' AND meta_value LIKE %s LIMIT 1;", '%' . like_escape( str_replace( trailingslashit( $base_url ), '', $img_url ) ) . '%' ) );
+            $result = $wpdb->get_var( $wpdb->prepare( "SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_wp_attachment_metadata' AND meta_value LIKE %s LIMIT 1;", '%' . wpdb::esc_like( str_replace( trailingslashit( $base_url ), '', $img_url ) ) . '%' ) );
             $attachment_id = absint( $result ) > 0 ? absint( $result ) : false;
         }
 
@@ -280,22 +284,9 @@ class ui {
      * @return boolean
      */
     public static function is_wp_version($is_ver) {
-        $wp_ver = explode('.', get_bloginfo('version'));
-        $is_ver = explode('.', $is_ver);
+        include( ABSPATH . WPINC . '/version.php' ); // $wp_version; // x.y.z
 
-        for($i = 0; $i <= count($is_ver); $i++) {
-            if (!isset($wp_ver[$i])) {
-                array_push($wp_ver, 0);
-            }
-        }
-
-        foreach ($is_ver as $i => $is_val) {
-            if ($wp_ver[$i] < $is_val) {
-                return false;
-            }
-        }
-
-        return true;
+        return version_compare($wp_version, $is_ver, '>=');
     }
 
     /**

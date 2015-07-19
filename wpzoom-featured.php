@@ -1,4 +1,4 @@
-	<div class="featured-grid clearfix"> 
+	<div class="featured-grid clearfix">
 	<?php
 		for ( $i = 1; $i <= 4; $i++ ) {
 
@@ -11,7 +11,7 @@
 
 	 		<?php
 			query_posts('showposts=1&' . $breaking_cat );
-			
+
 			while (have_posts()) :
 				the_post(); ?>
 
@@ -29,11 +29,11 @@
 					</div>
 	 			</div>
 
-			<?php endwhile; ?> 
-		 
+			<?php endwhile; ?>
+
 
 		<?php } ?>
  	</div>
-	 
+
  	<?php wp_reset_query(); ?>
  	<div class="clear"></div>

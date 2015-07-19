@@ -1,5 +1,5 @@
 				<div class="clear"></div>
-				
+
 				<div id="footer">
 
 						<div class="column">
@@ -9,17 +9,17 @@
 						<div class="column">
 							<?php dynamic_sidebar('Footer: Column 2') ?>
 						</div><!-- /2nd column -->
-						
+
 						<div class="column">
 							<?php dynamic_sidebar('Footer: Column 3') ?>
 						</div><!-- /3rd column -->
-						
+
 						<div class="column last">
 							<?php dynamic_sidebar('Footer: Column 4') ?>
 						</div><!-- /4th column -->
-						 
-				 
-					<div class="clear"></div>    
+
+
+					<div class="clear"></div>
 				</div> <!-- /#footer -->
 
 				<div class="clear"></div>
@@ -31,19 +31,20 @@
 
 		<div id="copyright">
 			<div class="inner-wrap">
-		
-				<?php _e('Copyright', 'wpzoom');?> &copy; <?php echo date("Y"); ?> &mdash; <a href="<?php echo home_url(); ?>/" class="on"><?php bloginfo('name'); ?></a>. <?php _e('All Rights Reserved.', 'wpzoom');?> 
+
+				<?php _e('Copyright', 'wpzoom');?> &copy; <?php echo date("Y"); ?> &mdash; <a href="<?php echo home_url(); ?>/" class="on"><?php bloginfo('name'); ?></a>. <?php _e('All Rights Reserved.', 'wpzoom');?>
 				<span><?php _e('Designed by', 'wpzoom');?> <a href="http://www.wpzoom.com" target="_blank" title="WPZOOM WordPress Themes">WPZOOM</a></span>
 
 			</div>
 		</div>
-				
+
 
 		<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 
 		<?php if ( ( option::get('featured_enable') == 'on' ) && $paged < 2 && is_home() ) {  ?>
 
 			<script type="text/javascript">
+			var featured_flex;
 			jQuery(document).ready(function($) {
 
 				$.fn.fp_stopDontMove = function() {
@@ -60,10 +61,10 @@
 					});
 				}
 
-				jQuery('#slider #slidemain').flexslider({
+				featured_flex = jQuery('#slider #slidemain').flexslider({
 					controlNav: true,
 					directionNav: true,
-					animationLoop: false,
+					animationLoop: true,
 					animation: 'slide',
 					useCSS: false,
 					video: true,
@@ -72,9 +73,8 @@
 					slideshow: <?php echo option::get('featured_rotate') == 'on' ? 'true' : 'false'; ?>,
 					before: $.fn.fp_stopDontMove
 				});
-
 			});
-			</script> 
+			</script>
 
 			<?php
 			wp_enqueue_script( 'frogaloop', get_template_directory_uri() . '/js/frogaloop.js', array(), wpzoom::$themeVersion, true );
@@ -83,7 +83,7 @@
 
 		<?php } ?>
 
-		<?php wp_footer(); ?> 
+		<?php wp_footer(); ?>
 
 	</body>
 </html>

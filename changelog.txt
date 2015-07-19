@@ -4,6 +4,12 @@ http://www.wpzoom.com/themes/alpha/
 CHANGELOG
 ---------
 
+v 2.0 (April 2, 2015)
+
+    - Social, Twitter, Facebook widgets removed in favour of Plugins: http://www.wpzoom.com/plugins/
+    - Numerous improvements & fixes.
+
+
 v 1.0 (October 24, 2013)
 
 	- initial release

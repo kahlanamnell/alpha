@@ -5,30 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><?php ui::title(); ?></title>
-
-    <link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_uri(); ?>" media="screen" />
-	<link href='http://fonts.googleapis.com/css?family=Roboto:400,700|Sintony:400,700' rel='stylesheet' type='text/css'>
- 	<?php if (option::get('sidebar_pos') == 'Left') { ?><style type="text/css">#sidebar { float:left; } #main, .single-area { float:right; } </style> <?php } ?>
+  	<?php if (option::get('sidebar_pos') == 'Left') { ?><style type="text/css">#sidebar { float:left; } #main, .single-area { float:right; } </style> <?php } ?>
 
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 
     <?php wp_head(); ?>
 </head>
-<body <?php body_class() ?>>
- 
+<body <?php body_class(); ?>>
+
   	<header id="header">
 
  		<div id="menutop">
 			<div class="inner-wrap">
-  
+
 				<?php if ( has_nav_menu( 'secondary' ) ) { ?>
 
 	 				<a class="btn_menu" id="toggle-top" href="#"></a>
-	 
+
 	 				<div id="topmenu-wrap">
 
-					 	<?php 
+					 	<?php
 							wp_nav_menu( array(
 								'container' => 'menu',
 								'container_class' => '',
@@ -45,55 +41,55 @@
 
 				<?php if ( is_active_sidebar( 'header' ) ) { ?>
 					<div id="navsocial">
-						 
+
 						<?php dynamic_sidebar('Header Social Icons'); ?>
-		  
-		 			</div> 
+
+		 			</div>
 				<?php } ?>
-	 
+
 	 			<div class="clear"></div>
 
  			</div><!-- /.inner-wrap -->
- 
+
 		</div><!-- /#menutop -->
 
   		<div class="inner-wrap header-wrap">
-   
+
  			<div id="logo">
 				<?php if (!option::get('misc_logo_path')) { echo "<h1>"; } ?>
-				
+
 				<a href="<?php echo home_url(); ?>" title="<?php bloginfo('description'); ?>">
 					<?php if (!option::get('misc_logo_path')) { bloginfo('name'); } else { ?>
 						<img src="<?php echo ui::logo(); ?>" alt="<?php bloginfo('name'); ?>" />
 					<?php } ?>
 				</a>
-				
+
 				<?php if (!option::get('misc_logo_path')) { echo "</h1>"; } ?>
 			</div><!-- / #logo -->
 
- 			 
+
 			<?php if (option::get('ad_head_select') == 'on') { ?>
 				<div class="adv">
-				
-					<?php if ( option::get('ad_head_code') <> "") { 
-						echo stripslashes(option::get('ad_head_code'));             
+
+					<?php if ( option::get('ad_head_code') <> "") {
+						echo stripslashes(option::get('ad_head_code'));
 					} else { ?>
 						<a href="<?php echo option::get('banner_top_url'); ?>"><img src="<?php echo option::get('banner_top'); ?>" alt="<?php echo option::get('banner_top_alt'); ?>" /></a>
-					<?php } ?>		   	
-						
+					<?php } ?>
+
 				</div><!-- /.adv --> <div class="clear"></div>
 			<?php } ?>
 
 			<div class="clear"></div>
 
- 
+
 			<div id="menu">
- 
+
 				<a class="btn_menu" id="toggle-main" href="#"></a>
 
 				<div id="menu-wrap">
-		 
-					<?php if ( has_nav_menu( 'primary' ) ) { 
+
+					<?php if ( has_nav_menu( 'primary' ) ) {
 						wp_nav_menu( array(
 							'container' => 'menu',
 							'container_class' => '',
@@ -108,18 +104,18 @@
 					?>
 
 				</div>
-  
+
 				<?php if (option::get('search_form') == 'on') { get_search_form(); } ?>
-		
+
 				<div class="clear"></div>
-  
+
 		 	</div><!-- /#menu -->
-  
+
 		</div><!-- /.inner-wrap -->
-	 
+
 	</header>
 
 	<?php if (option::get('breaking_on') == 'on') { get_template_part('breaking-news'); } ?>
 
-	<div class="container"> 
+	<div class="container">
 		<div class="content-wrap">
