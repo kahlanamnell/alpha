@@ -10,7 +10,15 @@
       */
       
       $pid = option::get('featured_category_' . $i);
-      $q = "showposts=1&p=$pid";
+      //$q = "showposts=1&p=$pid";
+
+      $q = array(
+            'post_type' => array(
+              'post', 'page'
+            ),
+            'showposts' => 1,
+            'post__in' => array($pid),
+          );
       
 			?>
 

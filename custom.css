@@ -11,10 +11,6 @@
 * and modify it to your liking.
 */
 
-ul#menu-footer li:last-child span {
-  display: none;
-}
-
 .archiveposts h1.title {
         margin:0 0 20px;
         display: block;
@@ -35,4 +31,16 @@ ul#menu-footer li:last-child span {
 
 #header {
 	border: none;
+}
+
+ul#menu-footer {
+  list-style-type: none;
+}
+
+ul#menu-footer li {
+  float: left;
+}
+
+ul#menu-footer li:last-child span {
+  display: none;
 }
