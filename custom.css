@@ -1,4 +1,4 @@
-/******************************************
+/******************************************  
  CUSTOM STYLESHEET
 *******************************************/
 
@@ -6,8 +6,33 @@
 * You can place your custom CSS statements in this file, after this message.
 * It is better to write everything custom here
 * because this file won't be replaced during updates.
-*
-* Simply copy an existing style from style.css to this file,
+* 
+* Simply copy an existing style from style.css to this file, 
 * and modify it to your liking.
 */
 
+ul#menu-footer li:last-child span {
+  display: none;
+}
+
+.archiveposts h1.title {
+        margin:0 0 20px;
+        display: block;
+        border-bottom: 1px solid #D9E0E6;
+        font-size: 18px;
+        color: #333;
+        padding: 15px 20px 10px;
+        font-weight: normal;
+}
+
+.featured-post {
+ 	width: 240px;
+}
+
+#logo {
+	margin: 0;
+}
+
+#header {
+	border: none;
+}
