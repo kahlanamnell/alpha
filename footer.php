@@ -30,10 +30,9 @@
 		</div> <!-- /.container -->
 
 		<div id="copyright">
-			<div class="inner-wrap">
-
+			<div class="inner-wrap">              <?php wp_nav_menu( array('menu'=>'footer', 'after'=>'<span>&nbsp;|&nbsp;</span>') ); ?>        <div style="clear:both;"></div>
 				<?php _e('Copyright', 'wpzoom');?> &copy; <?php echo date("Y"); ?> &mdash; <a href="<?php echo home_url(); ?>/" class="on"><?php bloginfo('name'); ?></a>. <?php _e('All Rights Reserved.', 'wpzoom');?>
-				<span><?php _e('Designed by', 'wpzoom');?> <a href="http://www.wpzoom.com" target="_blank" title="WPZOOM WordPress Themes">WPZOOM</a></span>
+			
 
 			</div>
 		</div>
