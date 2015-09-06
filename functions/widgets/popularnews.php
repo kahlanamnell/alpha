@@ -6,7 +6,7 @@
 
 class Wpzoom_Popular_News extends WP_Widget {
 
-	function Wpzoom_Popular_News() {
+	function __construct() {
 		/* Widget settings. */
 		$widget_ops = array( 'classname' => 'popular-news', 'description' => 'A list of the most popular posts' );
 
@@ -14,7 +14,7 @@ class Wpzoom_Popular_News extends WP_Widget {
 		$control_ops = array( 'id_base' => 'wpzoom-popular-news' );
 
 		/* Create the widget. */
-		$this->WP_Widget( 'wpzoom-popular-news', 'WPZOOM: Popular Posts', $widget_ops, $control_ops );
+		parent::__construct( 'wpzoom-popular-news', 'WPZOOM: Popular Posts', $widget_ops, $control_ops );
 	}
 
 	function widget( $args, $instance ) {
@@ -114,12 +114,12 @@ class Wpzoom_Popular_News extends WP_Widget {
 		/* Set up some default widget settings. */
 		$defaults = array( 'title' => 'Popular', 'maxposts' => 10, 'sincewhen' => 'forever' );
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
-		
+
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title:', 'wpzoom'); ?></label><br />
 			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" type="text"  class="widefat" />
 		</p>
-		
+
 		<p>
 			<label for="<?php echo $this->get_field_id( 'sincewhen' ); ?>"><?php _e('Since:', 'wpzoom'); ?></label><br />
 			<select id="<?php echo $this->get_field_id( 'sincewhen' ); ?>" name="<?php echo $this->get_field_name( 'sincewhen' ); ?>">

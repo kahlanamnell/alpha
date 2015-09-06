@@ -4,6 +4,14 @@ http://www.wpzoom.com/themes/alpha/
 CHANGELOG
 ---------
 
+v 2.0.2 (August 27, 2015)
+
+    - Minor fixes to make the theme work better with child themes (especially being able to replace functions from parent theme)
+    - modified files:
+        - functions/functions.php
+        - functions/post-options.php
+
+
 v 2.0.1 (June 21, 2015)
 
     - Fixed a bug with menu showing on mobile devices while the a page is loading

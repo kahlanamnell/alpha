@@ -15,7 +15,7 @@ $wpzoomColors['black'] = 'Black';
 class wpzoom_widget_category extends WP_Widget {
 
 	/* Widget setup. */
-	function wpzoom_widget_category() {
+	function __construct() {
 		/* Widget settings. */
 		$widget_ops = array( 'classname' => 'wpzoom', 'description' => __('Featured Category Widget for Homepage', 'wpzoom') );
 
@@ -23,7 +23,7 @@ class wpzoom_widget_category extends WP_Widget {
 		$control_ops = array( 'width' => 250, 'height' => 350, 'id_base' => 'wpzoom-widget-cat' );
 
 		/* Create the widget. */
-		$this->WP_Widget( 'wpzoom-widget-cat', __('WPZOOM: Featured Category', 'wpzoom'), $widget_ops, $control_ops );
+		parent::__construct( 'wpzoom-widget-cat', __('WPZOOM: Featured Category', 'wpzoom'), $widget_ops, $control_ops );
 	}
 
 	/* How to display the widget on the screen. */

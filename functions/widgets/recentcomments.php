@@ -3,10 +3,10 @@
 /*------------------------------------------*/
 /* WPZOOM: Recent Comments (with gravatar)	*/
 /*------------------------------------------*/
- 
+
 class Wpzoom_Recent_Comments extends WP_Widget {
-	
-	function Wpzoom_Recent_Comments() {
+
+	function __construct() {
 		/* Widget settings. */
 		$widget_ops = array( 'classname' => 'recent-comments', 'description' => 'A list of recent comments from all posts' );
 
@@ -14,9 +14,9 @@ class Wpzoom_Recent_Comments extends WP_Widget {
 		$control_ops = array( 'id_base' => 'wpzoom-recent-comments' );
 
 		/* Create the widget. */
-		$this->WP_Widget( 'wpzoom-recent-comments', 'WPZOOM: Recent Comments', $widget_ops, $control_ops );
+		parent::__construct( 'wpzoom-recent-comments', 'WPZOOM: Recent Comments', $widget_ops, $control_ops );
 	}
-	
+
  	function widget( $args, $instance ) {
 		extract( $args );
 
@@ -33,21 +33,21 @@ class Wpzoom_Recent_Comments extends WP_Widget {
 		/* Title of widget (before and after defined by themes). */
 		if ( $title )
 			echo $before_title . $title . $after_title;
-				
+
 			$comments = get_comments(array(
 				'number' => $show_count,
 				'status' => 'approve',
 				'type' => 'comment'
 			));
-			
+
 			echo '<ul class="recent-comments-list">';
-			
+
 			foreach($comments as $comment) :
-				
+
 				$comm_title = get_the_title($comment->comment_post_ID);
 				$comm_link = get_comment_link($comment->comment_ID);
 			?>
-		
+
 		<li>
 			<?php
 				if ( $show_avatar ) {
@@ -55,18 +55,18 @@ class Wpzoom_Recent_Comments extends WP_Widget {
 				}
 			?>
 			<a href="<?php echo($comm_link)?>"><?php echo($comment->comment_author)?>:</a> <?php echo substr(get_comment_excerpt( $comment->comment_ID ), 0, $excerpt_length); ?>&hellip;<div class="clear"></div>
-		</li> 
-		
-			<?php 
+		</li>
+
+			<?php
 			endforeach;
-			
+
 			echo '</ul>';
-		
+
 
 		/* After widget (defined by themes). */
 		echo $after_widget;
 	}
-	
+
  	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
 
@@ -79,13 +79,13 @@ class Wpzoom_Recent_Comments extends WP_Widget {
 
 		return $instance;
 	}
-	
+
  	function form( $instance ) {
 
 		/* Set up some default widget settings. */
 		$defaults = array( 'title' => 'Recent Comments', 'show_count' => 5, 'show_avatar' => false, 'avatar_size' => 60, 'excerpt_length' => 60 );
 		$instance = wp_parse_args( (array) $instance, $defaults ); ?>
-		
+
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>">Title:</label><br />
 			<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" type="text" class="widefat"/>
@@ -101,22 +101,22 @@ class Wpzoom_Recent_Comments extends WP_Widget {
 				?>
 			</select> comments
 		</p>
-		
+
 		<p>
 			<input class="checkbox" type="checkbox" <?php checked( $instance['show_avatar'], 'on' ); ?> id="<?php echo $this->get_field_id( 'show_avatar' ); ?>" name="<?php echo $this->get_field_name( 'show_avatar' ); ?>" />
 			<label for="<?php echo $this->get_field_id( 'show_avatar' ); ?>">Show avatar?</label>
 		</p>
-		
+
 		<p>
 			<label for="<?php echo $this->get_field_id( 'avatar_size' ); ?>">Avatar size:</label>
 			<input id="<?php echo $this->get_field_id( 'avatar_size' ); ?>" name="<?php echo $this->get_field_name( 'avatar_size' ); ?>" value="<?php echo $instance['avatar_size']; ?>" type="text" size="4" /> px
 		</p>
-		
+
 		<p>
 			<label for="<?php echo $this->get_field_id( 'excerpt_length' ); ?>">Comment excerpt:</label>
 			<input id="<?php echo $this->get_field_id( 'excerpt_length' ); ?>" name="<?php echo $this->get_field_name( 'excerpt_length' ); ?>" value="<?php echo $instance['excerpt_length']; ?>" type="text" size="4" /> characters
 		</p>
-		
+
 		<?php
 	}
 }

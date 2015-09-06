@@ -91,21 +91,28 @@ add_theme_support( 'custom-background' );
 /* Replaces the excerpt "more" text by a link
 =========================================== */
 
-function new_excerpt_more($more) {
-       global $post;
-  return '<a class="more-link" href="'. get_permalink($post->ID) . '">['.__('Read More', 'wpzoom').'...]</a>';
+if ( ! function_exists( 'new_excerpt_more' ) ) {
+
+    function new_excerpt_more($more) {
+           global $post;
+      return '<a class="more-link" href="'. get_permalink($post->ID) . '">['.__('Read More', 'wpzoom').'...]</a>';
+    }
+    add_filter('excerpt_more', 'new_excerpt_more');
+
 }
-add_filter('excerpt_more', 'new_excerpt_more');
 
 
 /* Custom Excerpt Length
 ==================================== */
 
-function new_excerpt_length($length) {
-	return (int) option::get("excerpt_length") ? (int) option::get("excerpt_length") : 50;
-}
-add_filter('excerpt_length', 'new_excerpt_length');
+if ( ! function_exists( 'new_excerpt_length' ) ) {
 
+    function new_excerpt_length($length) {
+    	return (int) option::get("excerpt_length") ? (int) option::get("excerpt_length") : 50;
+    }
+    add_filter('excerpt_length', 'new_excerpt_length');
+
+}
 
 /* Reset [gallery] shortcode styles
 ==================================== */
@@ -123,10 +130,15 @@ if ( ! isset( $content_width ) ) $content_width = 690;
 /* Tabbed Widget
 ============================ */
 
-function tabber_tabs_load_widget() {
-  // Register widget.
-  register_widget( 'WPZOOM_Widget_Tabber' );
+if ( ! function_exists( 'tabber_tabs_load_widget' ) ) {
+
+    function tabber_tabs_load_widget() {
+      // Register widget.
+      register_widget( 'WPZOOM_Widget_Tabber' );
+    }
+
 }
+
 
 
 /**
@@ -134,31 +146,41 @@ function tabber_tabs_load_widget() {
  * on the page as plain HTML. After tabber runs, the class is changed
  * to "tabberlive" and it will appear.
  */
-function tabber_tabs_temp_hide(){
-  echo '<script type="text/javascript">document.write(\'<style type="text/css">.tabber{display:none;}</style>\');</script>';
+
+if ( ! function_exists( 'tabber_tabs_temp_hide' ) ) {
+
+    function tabber_tabs_temp_hide(){
+      echo '<script type="text/javascript">document.write(\'<style type="text/css">.tabber{display:none;}</style>\');</script>';
+    }
+
 }
 
 
 // Function to check if there are widgets in the Tabber Tabs widget area
 // Thanks to Themeshaper: http://themeshaper.com/collapsing-wordpress-widget-ready-areas-sidebars/
-function is_tabber_tabs_area_active( $index ){
-  global $wp_registered_sidebars;
 
-  $widgetcolums = wp_get_sidebars_widgets();
+if ( ! function_exists( 'is_tabber_tabs_area_active' ) ) {
 
-  if ($widgetcolums[$index]) return true;
+    function is_tabber_tabs_area_active( $index ){
+      global $wp_registered_sidebars;
 
-  return false;
+      $widgetcolums = wp_get_sidebars_widgets();
+
+      if ($widgetcolums[$index]) return true;
+
+      return false;
+    }
+
 }
 
 
  // Let's build a widget
 class WPZOOM_Widget_Tabber extends WP_Widget {
 
-  function WPZOOM_Widget_Tabber() {
+  function __construct() {
     $widget_ops = array( 'classname' => 'tabbertabs', 'description' => __('Drag me to the Sidebar', 'wpzoom') );
     $control_ops = array( 'width' => 230, 'height' => 300, 'id_base' => 'wpzoom-tabber' );
-    $this->WP_Widget( 'wpzoom-tabber', __('WPZOOM: Tabs', 'wpzoom'), $widget_ops, $control_ops );
+    parent::__construct( 'wpzoom-tabber', __('WPZOOM: Tabs', 'wpzoom'), $widget_ops, $control_ops );
   }
 
   function widget( $args, $instance ) {
@@ -202,27 +224,29 @@ class WPZOOM_Widget_Tabber extends WP_Widget {
 /* Tabber Tabs Widget */
 tabber_tabs_plugin_init();
 
+
 /* Initializes the plugin and it's features. */
-function tabber_tabs_plugin_init() {
 
-  // Loads and registers the new widget.
-  add_action( 'widgets_init', 'tabber_tabs_load_widget' );
+    function tabber_tabs_plugin_init() {
 
-  //Registers the new widget area.
-  register_sidebar(
-    array(
-      'name' => __('WPZOOM: Tabs Widget Area', 'wpzoom'),
-      'id' => 'tabber_tabs',
-      'description' => __('Build your tabbed area by placing widgets here.  !! DO NOT PLACE THE WPZOOM: TABS IN THIS AREA.', 'wpzoom'),
-      'before_widget' => '<div id="%1$s" class="tabbertab %2$s">',
-      'after_widget' => '</div>'
-    )
-  );
+      // Loads and registers the new widget.
+      add_action( 'widgets_init', 'tabber_tabs_load_widget' );
 
-  // Hide Tabber until page load
-  add_action( 'wp_head', 'tabber_tabs_temp_hide' );
+      //Registers the new widget area.
+      register_sidebar(
+        array(
+          'name' => __('WPZOOM: Tabs Widget Area', 'wpzoom'),
+          'id' => 'tabber_tabs',
+          'description' => __('Build your tabbed area by placing widgets here.  !! DO NOT PLACE THE WPZOOM: TABS IN THIS AREA.', 'wpzoom'),
+          'before_widget' => '<div id="%1$s" class="tabbertab %2$s">',
+          'after_widget' => '</div>'
+        )
+      );
 
-}
+      // Hide Tabber until page load
+      add_action( 'wp_head', 'tabber_tabs_temp_hide' );
+
+    }
 
 
 /* Fix widgets no-title bug
@@ -230,16 +254,20 @@ function tabber_tabs_plugin_init() {
 
 add_filter ('widget_title', 'wpzoom_fix_widgets');
 
-function wpzoom_fix_widgets($content) {
+if ( ! function_exists( 'wpzoom_fix_widgets' ) ) {
 
-  $title = $content;
+    function wpzoom_fix_widgets($content) {
 
-  if (!$title)
-  {
-    $content = '<div class="empty"></div>';
-  }
+      $title = $content;
 
-    return $content;
+      if (!$title)
+      {
+        $content = '<div class="empty"></div>';
+      }
+
+        return $content;
+    }
+
 }
 
 
@@ -247,32 +275,36 @@ function wpzoom_fix_widgets($content) {
 /* Enqueue scripts and styles for the front end.
 =========================================== */
 
-function alpha_scripts() {
+if ( ! function_exists( 'alpha_scripts' ) ) {
 
-    $protocol = is_ssl() ? 'https' : 'http';
+    function alpha_scripts() {
 
-    // Load our main stylesheet.
-    wp_enqueue_style( 'alpha-style', get_stylesheet_uri() );
+        $protocol = is_ssl() ? 'https' : 'http';
 
-    wp_enqueue_style( 'media-queries', get_template_directory_uri() . '/css/media-queries.css', array(), WPZOOM::$themeVersion );
+        // Load our main stylesheet.
+        wp_enqueue_style( 'alpha-style', get_stylesheet_uri() );
 
-    wp_enqueue_script( 'flexslider', get_template_directory_uri() . '/js/flexslider.js', array( 'jquery' ), WPZOOM::$themeVersion, true );
+        wp_enqueue_style( 'media-queries', get_template_directory_uri() . '/css/media-queries.css', array(), WPZOOM::$themeVersion );
 
-    wp_enqueue_script( 'caroufredsel', get_template_directory_uri() . '/js/jquery.carouFredSel.js', array( 'jquery' ), WPZOOM::$themeVersion, true );
+        wp_enqueue_script( 'flexslider', get_template_directory_uri() . '/js/flexslider.js', array( 'jquery' ), WPZOOM::$themeVersion, true );
 
-    wp_enqueue_script( 'fitvids', get_template_directory_uri() . '/js/fitvids.min.js', array( 'jquery' ), WPZOOM::$themeVersion, true );
+        wp_enqueue_script( 'caroufredsel', get_template_directory_uri() . '/js/jquery.carouFredSel.js', array( 'jquery' ), WPZOOM::$themeVersion, true );
 
-    wp_enqueue_script( 'dropdown', get_template_directory_uri() . '/js/dropdown.js', array( 'jquery' ), WPZOOM::$themeVersion, true );
+        wp_enqueue_script( 'fitvids', get_template_directory_uri() . '/js/fitvids.min.js', array( 'jquery' ), WPZOOM::$themeVersion, true );
 
-    wp_enqueue_script( 'tabs', get_template_directory_uri() . '/js/tabs.js', array( 'jquery' ), WPZOOM::$themeVersion, true );
+        wp_enqueue_script( 'dropdown', get_template_directory_uri() . '/js/dropdown.js', array( 'jquery' ), WPZOOM::$themeVersion, true );
 
-    wp_enqueue_script( 'placeholder', get_template_directory_uri() . '/js/jquery.placeholder.min.js', array( 'jquery' ), WPZOOM::$themeVersion, true );
+        wp_enqueue_script( 'tabs', get_template_directory_uri() . '/js/tabs.js', array( 'jquery' ), WPZOOM::$themeVersion, true );
 
-    /* Google Fonts */
-    wp_enqueue_style( 'google-fonts', "$protocol://fonts.googleapis.com/css?family=Roboto:400,700|Sintony:400,700" );
+        wp_enqueue_script( 'placeholder', get_template_directory_uri() . '/js/jquery.placeholder.min.js', array( 'jquery' ), WPZOOM::$themeVersion, true );
 
-    wp_enqueue_script( 'alpha-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), WPZOOM::$themeVersion, true );
+        /* Google Fonts */
+        wp_enqueue_style( 'google-fonts', "$protocol://fonts.googleapis.com/css?family=Roboto:400,700|Sintony:400,700" );
 
- }
+        wp_enqueue_script( 'alpha-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), WPZOOM::$themeVersion, true );
+
+    }
+
+}
 
 add_action( 'wp_enqueue_scripts', 'alpha_scripts' );
