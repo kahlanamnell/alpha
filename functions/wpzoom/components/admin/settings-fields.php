@@ -12,7 +12,21 @@ class WPZOOM_Admin_Settings_Fields {
         $this->first = false;
         $stitle = 'wpz_' . substr(md5($name), 0, 8);
         $out.= "<div class=\"sub\" id=\"$stitle\">";
+
+        $out.= '<div class="zoom-sub-header">';
         $out.= "<h4>$name</h4>";
+
+        if (isset($desc)) {
+            if (is_array($desc)) {
+                foreach ($desc as $row) {
+                    $out.= "<p>$row</p>";
+                }
+            } else {
+                $out.= "<p>$desc</p>";
+            }
+        }
+
+        $out.='</div>';
 
         return $out;
     }
