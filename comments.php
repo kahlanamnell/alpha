@@ -69,13 +69,13 @@ $custom_comment_form = array( 'fields' => apply_filters( 'comment_form_default_f
  			'</p>',
     'url'    =>  '<p class="comment-form-url">' .
 			'<label for="url">' . __( 'Your Website' , 'wpzoom' ) . '</label> ' .
- 			'<input id="url" name="url" type="text" value="' . esc_attr(  $commenter['comment_author_url'] ) . '" size="30"' . $aria_req . ' placeholder="URL" />' .
+ 			'<input id="url" name="url" type="text" value="' . esc_attr(  $commenter['comment_author_url'] ) . '" size="30"' . $aria_req . ' placeholder="'.__( 'URL' , 'wpzoom' ).'" />' .
  			'</p></div><div class="clear"></div>') ),
 	'comment_field' => '<p class="comment-form-comment">' .
 			'<label for="comment">' . __( 'Comment' , 'wpzoom' ) . '</label> ' .
- 			'<textarea id="comment" name="comment" cols="35" rows="5" aria-required="true" class="required" placeholder="Message"></textarea>' .
+ 			'<textarea id="comment" name="comment" cols="35" rows="5" aria-required="true" class="required" placeholder="'. __( 'Message' , 'wpzoom' ) .'"></textarea>' .
 			'</p><div class="clear"></div>',
-	'logged_in_as' => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s">Log out?</a>' ), admin_url( 'profile.php' ), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( $post_id ) ) ) ) . '</p>',
+	'logged_in_as' => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s">Log out?</a>', 'wpzoom' ), admin_url( 'profile.php' ), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( $post_id ) ) ) ) . '</p>',
 	'title_reply' => __( 'Leave a Reply' , 'wpzoom' ),
   	'cancel_reply_link' => __( 'Cancel' , 'wpzoom' ),
 	'label_submit' => __( 'Submit' , 'wpzoom' ),

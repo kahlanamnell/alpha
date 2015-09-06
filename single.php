@@ -8,7 +8,7 @@
 		<div class="post-meta">
 			 
 		 	<h1 class="title">
-				<a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'wpzoom' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a>
+				<?php the_title(); ?>
 			</h1>
 
 			<?php if (option::get('post_category') == 'on') { ?><?php _e('in', 'wpzoom'); ?> <?php the_category('<span class="separator"> / </span>'); ?> <span class="separator">&mdash;</span><?php } ?>
@@ -72,6 +72,11 @@
 
 		<div class="clear"></div>
 
+    <?php if ( !empty( get_field('autor_box'))) : ?>
+      <div class="post-wrap"><?php the_field('autor_box'); ?></div>
+    <?php endif; ?>
+    
+    <div class="clear"></div>
 	 	 
 		<?php if (option::get('post_comments') == 'on') { ?>
 			<div class="post-wrap"><?php comments_template(); ?></div>

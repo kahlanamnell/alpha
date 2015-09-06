@@ -31,9 +31,17 @@
 
 		<div id="copyright">
 			<div class="inner-wrap">
-		
-				<?php _e('Copyright', 'wpzoom');?> &copy; <?php echo date("Y"); ?> &mdash; <a href="<?php echo home_url(); ?>/" class="on"><?php bloginfo('name'); ?></a>. <?php _e('All Rights Reserved.', 'wpzoom');?> 
-				<span><?php _e('Designed by', 'wpzoom');?> <a href="http://www.wpzoom.com" target="_blank" title="WPZOOM WordPress Themes">WPZOOM</a></span>
+                                <a href="/impressum/">Impressum</a> | 
+                                <a href="/datenschutz/">Datenschutz</a> | 
+				<a href="/ueber-uns/">Über Uns</a> | 
+                                <a href="/mitmachen/">Mitmachen</a> |
+                                <a href="/waehrungsrechner/">Währungsrechner</a> | 		
+                                <a href="/foto-galerien/">Foto-Galerien</a> | 		                  
+                                <a href="/werben/">Werben</a> | 
+                                <a href="/partner/">Partner</a> | 
+                                <a href="/newsletter/">Newsletter</a> | 
+                                <a href="/news/">News</a><br />
+				<?php _e('Copyright', 'wpzoom');?> &copy; <?php echo "2013 - " . date("Y"); ?> &mdash; <?php bloginfo('name'); ?>. <?php _e('All Rights Reserved.', 'wpzoom');?> 
 
 			</div>
 		</div>
@@ -41,48 +49,14 @@
 
 		<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 
-		<?php if ( ( option::get('featured_enable') == 'on' ) && $paged < 2 && is_home() ) {  ?>
-
-			<script type="text/javascript">
-			jQuery(document).ready(function($) {
-
-				$.fn.fp_stopDontMove = function() {
-					$(fp_vimeoPlayers).each(function(i, el) {
-						if ($(el).attr('src') != '') {
-							$f(el).api('pause');
-						}
-					});
-
-					$(fp_youtubePlayers).each(function() {
-						if ($.isFunction(this.stopVideo)) {
-							this.stopVideo();
-						}
-					});
-				}
-
-				jQuery('#slider #slidemain').flexslider({
-					controlNav: true,
-					directionNav: true,
-					animationLoop: false,
-					animation: 'slide',
-					useCSS: false,
-					video: true,
-					smoothHeight: true,
-					<?php if ( option::get('featured_rotate') == 'on' ) { echo 'slideshowSpeed: ' . option::get('featured_interval') . ','; } ?>
-					slideshow: <?php echo option::get('featured_rotate') == 'on' ? 'true' : 'false'; ?>,
-					before: $.fn.fp_stopDontMove
-				});
-
-			});
-			</script> 
-
-			<?php
-			wp_enqueue_script( 'frogaloop', get_template_directory_uri() . '/js/frogaloop.js', array(), wpzoom::$themeVersion, true );
-	        wp_enqueue_script( 'youtube-api', 'http://www.youtube.com/player_api', array(), wpzoom::$themeVersion, true );
-	        ?>
-
-		<?php } ?>
-
+		<?php if ( ( option::get('featured_enable') == 'on' ) && $paged < 2 && is_home() ) {  
+    
+      wp_enqueue_script( 'theme-slider', get_template_directory_uri() . '/js/slider.js', array(), wpzoom::$themeVersion, true );
+      wp_enqueue_script( 'frogaloop', get_template_directory_uri() . '/js/frogaloop.js', array(), wpzoom::$themeVersion, true );
+      wp_enqueue_script( 'youtube-api', 'http://www.youtube.com/player_api', array(), wpzoom::$themeVersion, true );
+      
+    }
+    ?>
 		<?php wp_footer(); ?> 
 
 	</body>

@@ -5,6 +5,10 @@
 <?php while (have_posts()) : the_post(); ?>
 	<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
+    <?php if ( get_post_type( get_the_ID() ) == "coupon") { ?>
+    <div class="coupon-corner"></div>
+    <?php } ?>
+  
 	 	<?php if (option::get('index_thumb') == 'on') {
      
 			get_the_image( array( 'size' => 'loop', 'width' => option::get('thumb_width'), 'height' => option::get('thumb_height'), 'before' => '<div class="post-thumb">', 'after' => '</div>' ) );

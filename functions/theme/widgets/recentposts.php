@@ -48,10 +48,11 @@ class Wpzoom_Feature_Posts extends WP_Widget {
 		
 		query_posts($query_opts);			
 		if ( have_posts() ) : while ( have_posts() ) : the_post();
+			$alt_text = get_post_meta(get_post_thumbnail_id(), '_wp_attachment_image_alt', true);
 			echo '<li>';
 				
 				if ( $show_thumb && has_post_thumbnail() ) { 
-					echo '<a href="' . get_permalink() . '"><img src="' . ui::thumbIt( absint( get_post_thumbnail_id() ), absint( $instance['thumb_width'] ), absint( $instance['thumb_height'] ) ) . '" height="' . $instance['thumb_height'] . '" width="' . $instance['thumb_width'] . '"></a>';
+					echo '<a href="' . get_permalink() . '"><img alt="'.$alt_text.'" src="' . ui::thumbIt( absint( get_post_thumbnail_id() ), absint( $instance['thumb_width'] ), absint( $instance['thumb_height'] ) ) . '" height="' . $instance['thumb_height'] . '" width="' . $instance['thumb_width'] . '"></a>';
 				}	
 						
 				if ( $show_title ) echo '<a href="' . get_permalink() . '">' . get_the_title() . '</a> <br />';

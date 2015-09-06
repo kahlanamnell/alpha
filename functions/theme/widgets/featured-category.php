@@ -73,7 +73,9 @@ class wpzoom_widget_category extends WP_Widget {
 		  $title = "title$z";
 		  $posts = "posts$z";
 		  $category = $instance["category$z"];
+
 ?>
+				
 		<div class="featured-category">
             <?php if ( $$title ) {	echo '<h3 class="'.$$color.'"><a href="'.$$categoryLink.'">'.$$title.'</a></h3>
             '; } ?>
@@ -101,8 +103,6 @@ class wpzoom_widget_category extends WP_Widget {
 
 						<div class="featured-meta">
 							<span><?php echo get_the_date(); ?></span>
-							<span class="separator">&mdash;</span>
-							<span><?php comments_popup_link( __('0 comments', 'wpzoom'), __('1 comment', 'wpzoom'), __('% comments', 'wpzoom'), '', __('Comments are Disabled', 'wpzoom')); ?></span>
 						</div>
 
 						<?php the_excerpt(); ?>
@@ -123,9 +123,7 @@ class wpzoom_widget_category extends WP_Widget {
 								<h4><a href="<?php the_permalink() ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h4>
 
 								<div class="featured-meta">
-									<span><?php echo get_the_date(); ?></span>
-									<span class="separator">&mdash;</span>
-									<span><?php comments_popup_link( __('0 comments', 'wpzoom'), __('1 comment', 'wpzoom'), __('% comments', 'wpzoom'), '', __('Comments are Disabled', 'wpzoom')); ?></span>
+                  <?php the_excerpt(); ?>
 								</div>
   
 							</div>

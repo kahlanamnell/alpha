@@ -42,15 +42,6 @@ Template Name: Archives Page
 					</ul>	
 				</div>
 				</div>
-			
-				<div class="col_arch">
-					<div class="left">
-				<?php _e('By Tags:', 'wpzoom'); ?>	 
-				</div>
-				<div class="right"> 
-					<?php wp_tag_cloud('format=list&smallest=14&largest=14&unit=px'); ?>
-				</div>
-				</div>
 			</div><!-- / .entry --> 
 				<div class="clear"></div>   
 		    

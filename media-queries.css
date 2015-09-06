@@ -16,7 +16,7 @@ custom.css and it will override the style in this file.
 /* Large Screens */
 @media screen and (max-width: 1115px) {
  
-    .inner-wrap { width: 96%; }
+    .inner-wrap { width: 94%; }
     .container { width: 94%; padding: 1% 1% 0; }
 
     .adv { display: none; }
@@ -85,7 +85,7 @@ custom.css and it will override the style in this file.
    
     #header { position: relative; }
     .btn_menu { display: block; float: left; cursor: pointer; background: #D63135 url('images/menu.png') 8px 9px no-repeat; padding: 5px 5px 0; width: 30px; height: 30px; border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; margin: 5px; }
-    #menu-wrap { margin: 0 15px; }
+    /*#menu-wrap { margin: 0 15px; }*/
     #menu .dropdown .sub-menu li { border: none; }
     #menu .dropdown .sub-menu { border: none; }
     #menutop .btn_menu { background-color: #1F394D; }
@@ -150,7 +150,7 @@ custom.css and it will override the style in this file.
 
     #slider { width: 100%; }
     .featured-separator { display: none; }
-    #logo { float:left; display: block; width: 97%; }
+    #logo { float:left; display: block; width: 100%; }
 
     #respond .form_fields { width:97%; margin:0; }
     #respond input, #respond textarea { width: 97%; }

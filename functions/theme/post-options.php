@@ -58,6 +58,7 @@ add_action('admin_menu', 'wpzoom_options_box');
 	function wpzoom_options_box() {
 		add_meta_box('wpzoom_post_layout', 'Post Layout', 'wpzoom_post_layout_options', 'post', 'normal', 'high');
 		add_meta_box('wpzoom_post_embed', 'Post Options', 'wpzoom_post_info', 'post', 'side', 'high');
+		add_meta_box('wpzoom_post_embed', 'Post Options', 'wpzoom_post_info', 'coupon', 'side', 'high');
   	}
 
  

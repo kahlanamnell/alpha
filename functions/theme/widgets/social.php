@@ -3,7 +3,7 @@
 /* WPZOOM: Social widget					*/
 /*------------------------------------------*/
 
-$socialProfiles = array('Facebook', 'Twitter', 'Google Plus', 'RSS', 'Email', 'Youtube', 'Vimeo', 'LinkedIn', 'Flickr', 'Pinterest', 'Instagram');
+$socialProfiles = array('Facebook', 'Twitter', 'Google Plus', 'Pinterest', 'RSS', 'Email', 'Youtube', 'Vimeo', 'LinkedIn', 'Flickr', 'Instagram');
 class wpzoom_widget_socialize extends WP_Widget {
 
 /* Widget setup. */

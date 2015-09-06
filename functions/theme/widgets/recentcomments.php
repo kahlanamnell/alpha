@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /*------------------------------------------*/
 /* WPZOOM: Recent Comments (with gravatar)	*/

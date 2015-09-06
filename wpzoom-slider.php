@@ -1,5 +1,6 @@
 <?php
 $loop = new WP_Query( array( 
+	'post_type' => array( 'post', 'coupon' ),
 	'post__not_in' => get_option( 'sticky_posts' ),
 	'posts_per_page' => option::get( 'featured_number' ),
 	'meta_key' => 'wpzoom_is_featured',
@@ -9,7 +10,7 @@ $loop = new WP_Query( array(
 
 <div id="slider">
 
-	<h3 class="title">Featured Stories</h3>
+	<h3 class="title">Die spannendsten Beiträge</h3>
 
 	<?php if ( $loop->have_posts() ) : ?>
 
@@ -25,11 +26,11 @@ $loop = new WP_Query( array(
 					?><li class="post-<?php echo $post->ID; ?>">
  					 
  						<?php
-							if ( strlen( $video ) > 1 ) { // Embedding video 
-								echo '<div class="video_cover">' . embed_fix( $video, 480, 270 ) . '</div>'; // add wmode=transparent to iframe/embed
-							} else {
+							//if ( strlen( $video ) > 1 ) { // Embedding video 
+								//echo '<div class="video_cover">' . embed_fix( $video, 480, 270 ) . '</div>'; // add wmode=transparent to iframe/embed
+							//} else {
 								get_the_image( array( 'size' => 'featured', 'before' => '<div class="cover">', 'after' => '</div>', 'width' => 480, 'height' => 330 ) );
-							}
+							//}
 						?>
  					  
 						<div class="slide_content">

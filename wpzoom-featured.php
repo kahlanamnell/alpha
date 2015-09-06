@@ -2,15 +2,20 @@
 	<?php
 		for ( $i = 1; $i <= 4; $i++ ) {
 
+			/*
 			$catid = option::get('featured_category_' . $i);
 			$cat = get_category($catid, false);
 			$catlink = get_category_link($catid);
 			$breaking_cat = "cat=$catid";
-
+			*/
+			
+			$pid = option::get('featured_category_' . $i);
+			$q = "p=$pid";
+			
 			?>
 
 	 		<?php
-			query_posts('showposts=1&' . $breaking_cat );
+			query_posts( $q );
 			
 			while (have_posts()) :
 				the_post(); ?>
@@ -20,12 +25,8 @@
 					<?php get_the_image( array( 'size' => 'featured-posts', 'link_to_post' => false, 'width' => 75, 'height' => 75 ) );  ?>
 
 					<div class="post-content">
-		 				<h3><a href="<?php the_permalink() ?>" title="<?php the_title(); ?>"><?php if (strlen($post->post_title) > 35) {
-						echo substr(the_title($before = '', $after = '', FALSE), 0, 35) . '...'; } else {
-						the_title();
-						} ?></a></h3>
+		 				<h3><a href="<?php the_permalink() ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h3>
 
-						<?php the_content_limit(45); ?>
 					</div>
 	 			</div>
 

@@ -58,6 +58,10 @@
 
  	<div class="main-area">
 		<?php if (is_home() && $paged < 2) { ?>
+                        <div class="featured-category">
+                            <h3 class="green"><a>Galerie</a></h3>
+                            <center><?php echo do_shortcode('[dopts id=5]'); ?></center>
+                        </div>
 	   
 			<?php dynamic_sidebar('Homepage'); ?>
 			

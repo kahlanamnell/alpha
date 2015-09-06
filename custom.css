@@ -11,3 +11,241 @@
 * and modify it to your liking.
 */
 
+/*
+#wpzoom-videos-2 .flex-control-nav {
+    background: #14ab80;
+}
+*/
+.actions a {
+  position: relative;
+  display: block;
+  padding: 10px 15px 13px 15px;
+  min-height: 18px;
+  max-width: 13em;
+  overflow: hidden;
+  font-size: 17px;
+  line-height: 1em;
+  color: #FFF;
+  background: #DC002E;
+  border-radius: 2px;
+}
+
+.actions a:after {
+  content: "";
+  background-image: url("images/arrow-right.png");
+  background-repeat: no-repeat;
+  width: 7px;
+  height: 12px;
+  display: inline-block;
+  margin-left: 15px;
+}
+
+#cookies  a {
+  font-size: 1em;
+}
+
+#cookies > div.body {
+  background: #969696;
+}
+
+.cookies{ display:none; z-index:204; position:relative; background: #4b4a4d; }
+	.cookies .body{ padding:9px 10% 9px 10%;  }
+	.cookies p{ display:inline-block;margin:0; font-size:0.7em;color:#fff; vertical-align: middle; }
+	.cookies .actions{ display:inline-block;clear:none; margin: 0 0 0 20px; color:#4D4D4D; vertical-align: middle; }
+	.cookies .actions .blue{margin:0;}
+	.cookies .actions .blue a {background: #747474;}
+	.cookies .actions .blue a:hover,.cookies .actions .blue a:active {background: #858585;}
+
+	.go{ display:inline-block;margin:0 0 0 30px; vertical-align: middle; font-size:0.8em;color: #fff; }
+		.go:after{ /* #sprt */ content:''; display:inline-block; margin:0 0 0 10px; /*width:8px; height:12px; vertical-align:-1px; background-position:-20px -2px; */}
+		.go:hover,
+		.go:active{ color:#000; }
+		.go:hover:after,
+		.go:active:after{ background-position:-20px -130px; }
+
+.ds .cookies a.go {font-size:0.8em;color: #fff;}
+.ds .cookies a.go:hover, .ds .cookies a.go:active {color: #000;}
+.ds .cookies .actions .blue a {background: #3b3a3b;}
+.ds .cookies .actions .blue a:hover, .ds .cookies .actions .blue a:active {background: #000000;}
+
+#cookies ul.actions {
+  list-style-position: initial;
+  list-style-type: none;
+}
+
+#polls-widget-2 h3.title {
+    background-color: #0a7153;
+}
+
+#wpzoom-videos-2 h3.title {
+    background-color: #0a7153;
+}
+
+#wpp-2 h3.title {
+    background-color: #0a7153;
+}
+
+#menu-item-3787 a {
+    color: #A9A7DB;
+}
+
+#menu-item-3787 a:hover {
+    color: #FFF5BE;
+}
+
+#cptch_input { background-color: #ffffff; }
+
+span.dropcaps {
+    font-family:Georgia, serif;
+    color: #ccc;
+    font-size: 46px;
+    float: left;
+    font-weight: 400;
+    line-height: 1em;
+    margin-bottom: -0.4em;
+    margin-right: 0.09em;
+    position: relative;
+}
+
+p.subscribe-to-doi-comments {
+    padding-top: 5px;
+    margin-bottom: 0 !important;
+}
+
+.archiveposts .coupon {
+	padding: 0 20px 20px;
+	border-bottom: 1px solid #D9E0E6;
+	margin: 20px 0;
+}
+
+.yarpp-thumbnails-horizontal .yarpp-thumbnail {
+    width: 125px !important;
+}
+
+.coupon-corner {
+  background:url('images/coupon_corner.png') no-repeat;
+  position:absolute;
+  top: -20px;
+  left: -0px;
+  padding: 0;
+  width: 108px;
+  height: 97px;
+  z-index:999;
+}
+
+.coupon {
+  position:relative;
+}
+
+#logo {
+	position:relative;
+}
+
+#search-tip
+{
+	background:url(images/tip-background2.png) no-repeat;
+	position:absolute;
+	bottom:0px;
+	width: 285px;
+	z-index:801;
+}
+
+#search-tip p
+{
+	padding-top: 18px;
+	padding-right: 5px;
+	padding-bottom: 0px;
+	padding-left: 15px;
+  	color:#000;
+	float:left;
+	font-size:11px;
+}
+
+#search-tip a
+{
+	background:url(images/tip-button-close.png) 0 0 no-repeat;
+	cursor:pointer;
+	display:block;
+	float:right;
+	height:15px;
+	margin-top: 18px;
+	margin-right: 20px;
+	padding:0;
+	width:15px;
+}
+
+.yarpp-thumbnail > img, .yarpp-thumbnail-default {
+	height: auto !important;
+
+}
+
+#social-signs {
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+
+#social-signs ul {
+  list-style-type: none;
+}
+
+#social-signs li {
+  margin-left: 5px;
+  float:left;
+}
+
+div.right-col-content > div > p {
+  text-align: justify;
+  font-size: 9px;
+}
+
+.right-col li {
+	padding: 0 20px 0px;
+}
+
+div.left-col-content > p {
+  text-align: justify;
+}
+
+
+a.more-link { margin:5px 0 0 3px; }
+
+.archiveposts  .category-weltreise .entry p {
+  text-align: justify;
+}
+#wpzoom-feature-posts-6 > h3 {
+    background-color: #0a7153;
+}
+#text-12 > h3 {
+    background-color: #0a7153;
+}
+#wpzoom-feature-posts-5 > h3 {
+    background-color: #0a7153;
+}
+#wpzoom-feature-posts-7 > h3 {
+    background-color: #0a7153;
+}
+
+div.fpw-excerpt > p > a.more-link {
+  float: right;
+}
+
+.sticky-popup {
+  width: 520px !important;
+}
+
+.popup-content {
+  height: 260px !important;
+  overflow-y: hidden !important;
+}
+
+.sticky-popup-right, .sticky-popup-left {
+  top: 0 !important;
+}
+
+
+.sticky-popup-right .popup-header {
+  margin-top: 0 !important;
+  height: 210px !important;
+}
+  
